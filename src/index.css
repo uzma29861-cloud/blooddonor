@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Default Theme: Crimson Pulse (Medical Red) */
+  :root, .theme-crimson {
+    --emergency-50: #fff1f2;
+    --emergency-100: #ffe4e6;
+    --emergency-200: #fecdd3;
+    --emergency-300: #fda4af;
+    --emergency-400: #fb7185;
+    --emergency-500: #e11d48;
+    --emergency-600: #be123c;
+    --emergency-700: #9f1239;
+    --emergency-800: #881337;
+    --emergency-900: #4c0519;
+    --emergency-950: #2a040e;
+
+    --surface-bg: #f8fafc;
+    --surface-card: #ffffff;
+    --surface-border: #e2e8f0;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+  }
+
+  /* Theme 2: Medical Teal & Emerald */
+  .theme-teal {
+    --emergency-50: #f0fdfa;
+    --emergency-100: #ccfbf1;
+    --emergency-200: #99f6e4;
+    --emergency-300: #5eead4;
+    --emergency-400: #2dd4bf;
+    --emergency-500: #14b8a6;
+    --emergency-600: #0f766e;
+    --emergency-700: #115e59;
+    --emergency-800: #134e4a;
+    --emergency-900: #042f2e;
+    --emergency-950: #021a19;
+
+    --surface-bg: #f8fafc;
+    --surface-card: #ffffff;
+    --surface-border: #e2e8f0;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+  }
+
+  /* Theme 3: Royal Trust Blue */
+  .theme-blue {
+    --emergency-50: #eff6ff;
+    --emergency-100: #dbeafe;
+    --emergency-200: #bfdbfe;
+    --emergency-300: #93c5fd;
+    --emergency-400: #60a5fa;
+    --emergency-500: #3b82f6;
+    --emergency-600: #1d4ed8;
+    --emergency-700: #1e40af;
+    --emergency-800: #1e3a8a;
+    --emergency-900: #172554;
+    --emergency-950: #0b132b;
+
+    --surface-bg: #f8fafc;
+    --surface-card: #ffffff;
+    --surface-border: #e2e8f0;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+  }
+
+  /* Theme 4: High-Contrast Dark Mode */
+  .theme-dark {
+    --emergency-50: #2a0e17;
+    --emergency-100: #3f1322;
+    --emergency-200: #601833;
+    --emergency-300: #881337;
+    --emergency-400: #be123c;
+    --emergency-500: #e11d48;
+    --emergency-600: #f43f5e;
+    --emergency-700: #fb7185;
+    --emergency-800: #fda4af;
+    --emergency-900: #fecdd3;
+    --emergency-950: #fff1f2;
+
+    --surface-bg: #0f172a;
+    --surface-card: #1e293b;
+    --surface-border: #334155;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+  }
+
+  body {
+    background-color: var(--surface-bg);
+    color: var(--text-main);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+}
+
+/* Custom leaflet tweaks */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 1.5rem;
+  z-index: 10;
+}
+
+.custom-hosp-pin, .custom-donor-pin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23be123c'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LifePulse - Rapid Voluntary Blood Donor Network</title>
+
+    <!-- Immediate Theme Initialization to avoid flash -->
+    <script>
+      (function() {
+        try {
+          var t = localStorage.getItem('lifepulse_theme') || 'crimson';
+          document.documentElement.className = 'theme-' + t;
+        } catch (e) {}
+      })();
+    </script>
+
+    <!-- Global Early Error & Rejection Catcher -->
+    <script>
+      function reportGlobalError(title, err) {
+        var box = document.getElementById('debug-error-box');
+        if (!box) {
+          box = document.createElement('div');
+          box.id = 'debug-error-box';
+          box.style = 'position:fixed;top:0;left:0;right:0;padding:16px 24px;background:#9f1239;color:#fff;z-index:999999;font-family:sans-serif;font-size:13px;box-shadow:0 6px 20px rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:space-between;';
+          document.body ? document.body.appendChild(box) : document.documentElement.appendChild(box);
+        }
+        box.innerHTML = '<div><b>' + title + ':</b> ' + (err?.message || err) + '</div><button onclick="localStorage.clear();location.reload();" style="background:#fff;color:#9f1239;border:none;padding:6px 14px;border-radius:6px;font-weight:bold;cursor:pointer;margin-left:12px;">Reset Cache & Reload</button>';
+      }
+
+      window.addEventListener('error', function(e) {
+        console.error('[LifePulse Global Error]', e);
+        reportGlobalError('Startup Error', e.message || e);
+      });
+
+      window.addEventListener('unhandledrejection', function(e) {
+        console.error('[LifePulse Unhandled Rejection]', e);
+        reportGlobalError('Promise Error', e.reason?.message || e.reason || 'Unhandled Async Rejection');
+      });
+    </script>
+
+    <!-- Google Fonts with fallback display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+      .font-mono {
+        font-family: 'JetBrains Mono', monospace;
+      }
+      @keyframes pulse-ring {
+        0% { transform: scale(0.6); opacity: 0.9; }
+        50% { transform: scale(1.3); opacity: 0.4; }
+        100% { transform: scale(1.8); opacity: 0; }
+      }
+      .pulse-marker::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: #be123c;
+        border-radius: 50%;
+        z-index: -1;
+        animation: pulse-ring 2s infinite ease-out;
+      }
+      @keyframes lifepulse-progress {
+        0% { transform: translateX(-100%); }
+        50% { transform: translateX(50%); }
+        100% { transform: translateX(200%); }
+      }
+    </style>
+  </head>
+  <body class="bg-slate-50 text-slate-900 antialiased selection:bg-rose-100 selection:text-rose-900 min-h-screen">
+    <!-- Immediate HTML Fallback Placeholder (Replaced once React mounts) -->
+    <div id="root">
+      <div style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1e293b; text-align: center; padding: 24px;">
+        <div style="width: 58px; height: 58px; border-radius: 18px; background: linear-gradient(135deg, #be123c, #9f1239); display: flex; align-items: center; justify-content: center; color: white; margin-bottom: 16px; box-shadow: 0 10px 25px -5px rgba(190, 18, 60, 0.4);">
+          <svg style="width: 32px; height: 32px; fill: white;" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        </div>
+        <h2 style="font-size: 22px; font-weight: 800; margin: 0 0 6px 0; letter-spacing: -0.025em; color: #0f172a;">LifePulse Rapid Network</h2>
+        <p style="font-size: 13px; color: #64748b; margin: 0 0 20px 0;">Connecting verified voluntary blood donors in real-time...</p>
+        <div style="width: 140px; height: 4px; background: #ffe4e6; border-radius: 9999px; overflow: hidden; position: relative;">
+          <div style="width: 50px; height: 100%; background: #be123c; border-radius: 9999px; animation: lifepulse-progress 1.4s infinite ease-in-out;"></div>
+        </div>
+
+        <div id="loading-fallback-action" style="display: none; margin-top: 24px;">
+          <p style="font-size: 12px; color: #64748b; margin-bottom: 8px;">Taking longer than expected?</p>
+          <button onclick="localStorage.clear();sessionStorage.clear();location.reload();" style="background: #be123c; color: white; font-size: 12px; font-weight: bold; border: none; padding: 8px 18px; border-radius: 9999px; cursor: pointer; box-shadow: 0 2px 8px rgba(190,18,60,0.3);">
+            Clear Cache & Reload App
+          </button>
+        </div>
+        <script>
+          setTimeout(function() {
+            var action = document.getElementById('loading-fallback-action');
+            if (action) action.style.display = 'block';
+          }, 2500);
+        </script>
+      </div>
+    </div>
+
+    <!-- Main Module Script -->
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
